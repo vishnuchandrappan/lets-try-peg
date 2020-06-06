@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from "react-redux";
 export function Loading() {
   return (
     <div className="loading">
@@ -11,6 +11,14 @@ export function Loading() {
   );
 }
 
-export default function isLoading({ isLoading }) {
-  return isLoading === 1 ? <Loading /> : "";
+function isLoading({ isFetching }) {
+  return isFetching === 1 ? <Loading /> : "";
 }
+
+function mapStateToProps(state) {
+  return {
+    isFetching: state.data.isFetching,
+  };
+}
+
+export default connect(mapStateToProps)(isLoading);

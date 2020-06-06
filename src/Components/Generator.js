@@ -1,27 +1,14 @@
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React, { Component } from "react";
-import { getData } from "../Resources/data";
+import { connect } from "react-redux";
 import CardContainer from "./CardContainer";
-import Loading from "./Loading";
 import Menu from "./Menu";
 class Generator extends Component {
-  state = {
-    data: [],
-    limit: 12,
-    isFetching: 0,
-    show: true,
-  };
-
   fetchData = () => {
-    this.setState({
-      isFetching: 1,
-    });
+    this.props.onRequest();
     setTimeout(() => {
-      this.setState({
-        data: getData(this.state.limit),
-        isFetching: 0,
-      });
+      this.props.onFetch();
     }, 1000);
   };
 
@@ -29,37 +16,25 @@ class Generator extends Component {
     this.fetchData();
   }
 
-  handleChange = (limit) => {
-    this.setState({
-      limit,
-    });
-  };
   render() {
     return (
       <div className="container">
-        <Menu
-          limit={this.state.limit}
-          onChange={this.handleChange}
-          generate={this.fetchData}
-        />
-        <Loading isLoading={this.state.isFetching} />
+        <Menu generate={this.fetchData} />
         <h1>Words to remember</h1>
-        {this.state.data.length > 0 ? (
-          <>
+        {this.props.data.length > 0 ? (
+          <React.Fragment>
             <div className="btn-container jc-end">
               <button
                 className="btn"
                 onClick={() => {
-                  this.setState({
-                    show: !this.state.show,
-                  });
+                  this.props.onToggle();
                 }}
               >
-                {this.state.show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                {this.props.show ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </button>
             </div>
-            <CardContainer data={this.state.data} show={this.state.show} />
-          </>
+            <CardContainer />
+          </React.Fragment>
         ) : (
           "No data found"
         )}
@@ -68,8 +43,21 @@ class Generator extends Component {
   }
 }
 
-export default Generator;
-/**
- *
- * https://random-word-api.herokuapp.com/word?number=12
- */
+function mapStateToProps({ data }) {
+  return {
+    data: data.data,
+    limit: data.limit,
+    show: data.show,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onRequest: () => dispatch({ type: "REQUEST_DATA" }),
+    onFetch: () => dispatch({ type: "FETCH_DATA" }),
+    onChange: (data) => dispatch({ type: "SET_LIMIT", data }),
+    onToggle: () => dispatch({ type: "TOGGLE_SHOW" }),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Generator);

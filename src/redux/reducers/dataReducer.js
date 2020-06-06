@@ -1,9 +1,12 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { getData } from "../../Resources/data";
 
 const INITIAL_STATE = {
   data: false,
   isFetching: 0,
+  show: true,
+  limit: 12,
 };
 
 export const DataReducer = persistReducer(
@@ -17,8 +20,18 @@ export const DataReducer = persistReducer(
 
       case "FETCH_DATA":
         return Object.assign({}, state, {
-          data: action.data,
+          data: getData(state.limit),
           isFetching: 0,
+        });
+
+      case "TOGGLE_SHOW":
+        return Object.assign({}, state, {
+          show: !state.show,
+        });
+
+      case "SET_LIMIT":
+        return Object.assign({}, state, {
+          limit: action.data,
         });
 
       default:

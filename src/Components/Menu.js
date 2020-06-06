@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default function Menu({ limit, generate, onChange }) {
+function Menu({ limit, generate, onChange }) {
   return (
     <div className="menu">
       <form
@@ -33,3 +34,17 @@ export default function Menu({ limit, generate, onChange }) {
     </div>
   );
 }
+
+function mapStateToProps({data}) {
+  return {
+    limit: data.limit,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onChange: (data) => dispatch({ type: "SET_LIMIT", data }),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

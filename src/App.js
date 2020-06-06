@@ -1,12 +1,14 @@
 import React from "react";
-import Routes from "./Resources/Routes";
 import { Provider } from "react-redux";
-import store from './redux/store';
+import Loading from "./Components/Loading";
+import store from "./redux/store";
+import Routes from "./Resources/Routes";
 
 function App() {
   return (
     <Provider store={store}>
       <Routes />
+      <Loading />
     </Provider>
   );
 }
