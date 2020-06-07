@@ -352,3 +352,16 @@ header {
   justify-content: center;
   text-align: center;
 }
+
+/** About */
+.peg-system {
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      border-radius: 4px;
+    }
+  }
+}
