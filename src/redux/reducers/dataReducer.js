@@ -3,14 +3,14 @@ import storage from "redux-persist/lib/storage";
 import { getData } from "../../Resources/data";
 
 const INITIAL_STATE = {
-  data: false,
+  data: [],
   isFetching: 0,
   show: true,
   limit: 12,
 };
 
 export const DataReducer = persistReducer(
-  { storage, key: "data", whitelist: ["data"] },
+  { storage, key: "data", whitelist: ["data", "limit"] },
   (state = INITIAL_STATE, action) => {
     switch (action.type) {
       case "REQUEST_DATA":
@@ -22,6 +22,7 @@ export const DataReducer = persistReducer(
         return Object.assign({}, state, {
           data: getData(state.limit),
           isFetching: 0,
+          show: 1,
         });
 
       case "TOGGLE_SHOW":

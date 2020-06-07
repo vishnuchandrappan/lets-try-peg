@@ -201,24 +201,28 @@ export const data = [
   "worm",
 ];
 
-
 /** Fisher–Yates Shuffle Algorithm */
-export const getData = (limit) => {
+export const getData = (limit = data.length, arr = data) => {
   var copy = [],
     i;
 
   // While there remain elements to shuffle…
   while (limit) {
     // Pick a remaining element…
-    i = Math.floor(Math.random() * data.length);
+    i = Math.floor(Math.random() * arr.length);
 
     // If not already shuffled, move it to the new array.
-    if (i in data) {
-      copy.push(data[i]);
-      delete data[i];
+    if (i in arr) {
+      copy.push(arr[i]);
+      delete arr[i];
       limit--;
     }
   }
 
   return copy;
+};
+
+export const getRandomList = (limit) => {
+  let data = [...Array(limit).keys()];
+  return getData(data.length, data);
 };

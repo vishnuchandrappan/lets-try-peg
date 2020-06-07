@@ -80,6 +80,11 @@ a {
     border-radius: 4px;
     transition: 0.3s;
     min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    color: $color-4;
     &:hover {
       font-weight: bold;
     }
@@ -96,11 +101,32 @@ a {
     justify-content: center;
     align-items: center;
   }
+  .button {
+    padding: 10px;
+    background-color: $color-3;
+    color: $color-4;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    &:hover {
+      font-weight: bold;
+    }
+  }
 }
 
 .jc-end {
   justify-content: flex-end;
   padding-right: 10px;
+  button {
+    margin: 0 10px;
+  }
 }
 
 .container {
@@ -263,4 +289,66 @@ header {
   .card-container {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/** Game */
+.game-container {
+  max-width: 100vw;
+  max-height: 100vh;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  .form-group {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    max-width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba($color-2, 0.1);
+    label {
+      font-size: 4rem;
+    }
+    input {
+      padding: 20px;
+      font-size: 2rem;
+    }
+  }
+}
+
+.full-page {
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  span {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .game-container {
+    .form-group {
+      max-width: 100%;
+    }
+  }
+}
+
+@media screen and (max-height: 768px) {
+  .game-container {
+    height: 70vh;
+  }
+}
+
+/** Result*/
+.status {
+  background-color: rgba($color-2, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }

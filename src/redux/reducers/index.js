@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import DataReducer from "./dataReducer";
+import GameReducer from "./gameReducer";
 
 const appReducer = combineReducers({
   data: DataReducer,
+  game: GameReducer,
 });
 
 const rootReducer = (state, action) => {

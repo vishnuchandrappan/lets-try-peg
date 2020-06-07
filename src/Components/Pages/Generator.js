@@ -1,15 +1,18 @@
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import CardContainer from "./CardContainer";
-import Menu from "./Menu";
+import CardContainer from "../CardContainer";
+import Menu from "../Menu";
 class Generator extends Component {
   fetchData = () => {
-    this.props.onRequest();
-    setTimeout(() => {
-      this.props.onFetch();
-    }, 1000);
+    if (!(this.props.isStarted === false && this.props.completed === true)) {
+      this.props.onRequest();
+      setTimeout(() => {
+        this.props.onFetch();
+      }, 1000);
+    }
   };
 
   componentDidMount() {
@@ -24,6 +27,14 @@ class Generator extends Component {
         {this.props.data.length > 0 ? (
           <React.Fragment>
             <div className="btn-container jc-end">
+              <button
+                onClick={() => {
+                  this.props.onStart(parseInt(this.props.limit));
+                }}
+              >
+                Game
+                <ChevronRightIcon />
+              </button>
               <button
                 className="btn"
                 onClick={() => {
@@ -43,11 +54,13 @@ class Generator extends Component {
   }
 }
 
-function mapStateToProps({ data }) {
+function mapStateToProps({ data, game }) {
   return {
     data: data.data,
     limit: data.limit,
     show: data.show,
+    isStarted: game.isStarted,
+    completed: game.completed,
   };
 }
 
@@ -57,6 +70,7 @@ function mapDispatchToProps(dispatch) {
     onFetch: () => dispatch({ type: "FETCH_DATA" }),
     onChange: (data) => dispatch({ type: "SET_LIMIT", data }),
     onToggle: () => dispatch({ type: "TOGGLE_SHOW" }),
+    onStart: (data) => dispatch({ type: "START_GAME", data }),
   };
 }
 
