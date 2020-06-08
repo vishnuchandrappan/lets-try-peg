@@ -1,3 +1,4 @@
+import { TableBody } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableCell from "@material-ui/core/TableCell";
@@ -12,18 +13,20 @@ export default function UserProfile() {
       <div className="user-data">
         <TableContainer component={Paper}>
           <Table>
-            <TableRow>
-              <TableCell align="center">Success Rate</TableCell>
-              <TableCell align="center">80%</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align="center">Games Played</TableCell>
-              <TableCell align="center">19</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align="center">Fastest Guess</TableCell>
-              <TableCell align="center">1 min 6 sec - 20 Words</TableCell>
-            </TableRow>
+            <TableBody>
+              <TableRow>
+                <TableCell align="center">Success Rate</TableCell>
+                <TableCell align="center">80%</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align="center">Games Played</TableCell>
+                <TableCell align="center">19</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align="center">Fastest Guess</TableCell>
+                <TableCell align="center">1 min 6 sec - 20 Words</TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </TableContainer>
       </div>

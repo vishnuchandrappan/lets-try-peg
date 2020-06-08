@@ -422,6 +422,20 @@ header {
   float: right;
   margin: 0 10px;
   cursor: pointer;
+  &:hover {
+    svg {
+      animation: rotateInfinite 3s infinite linear;
+    }
+  }
+}
+
+@keyframes rotateInfinite {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /** Preference */
@@ -467,4 +481,71 @@ header {
   background-color: rgba($color-4, 0.1);
   margin: 10px;
   border-radius: 4px;
+}
+
+/** Timer */
+.timer {
+  position: absolute;
+  background-color: rgba(#000, 0.8);
+  color: $color-2;
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.3s;
+  opacity: 0.2;
+  h1 {
+    font-size: 4rem;
+    padding: 0;
+    transition: 0.3s;
+    margin: 0;
+  }
+  button {
+    width: 0;
+    height: 0;
+    font-size: 0;
+    transition: 0.4s;
+    padding: 0;
+  }
+  span {
+    transition: 0.4s;
+    font-size: 0rem;
+    text-align: center;
+  }
+  &:hover {
+    opacity: 1;
+    h1 {
+      font-size: 3rem;
+    }
+    button {
+      padding: 10px;
+      background-color: $color-3;
+      color: $color-4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      height: 40px;
+    }
+    span {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.fl-left{
+  float: left;
+}
+
+@media screen and (max-width: 768px) {
+  .timer {
+    position: absolute;
+    left: 10px;
+    height: 100px;
+    &:hover {
+      height: 200px;
+    }
+  }
 }

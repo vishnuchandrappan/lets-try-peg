@@ -4,14 +4,10 @@ import { getData } from "../../Resources/data";
 
 const INITIAL_STATE = {
   data: [],
-  isFetching: 0,
-  show: true,
-  limit: 12,
-  time: Date.now(),
 };
 
-export const DataReducer = persistReducer(
-  { storage, key: "data", whitelist: ["data", "limit", "time"] },
+export const RecordsReducer = persistReducer(
+  { storage, key: "records", whitelist: ["data"] },
   (state = INITIAL_STATE, action) => {
     switch (action.type) {
       case "REQUEST_DATA":
@@ -42,4 +38,4 @@ export const DataReducer = persistReducer(
     }
   }
 );
-export default DataReducer;
+export default RecordsReducer;

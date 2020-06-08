@@ -15,7 +15,7 @@ export default function SideMenu({ show, onClose }) {
       </div>
       <Preference />
       <UserProfile />
-      <dib className="btn-container">
+      <div className="btn-container">
         <button
           onClick={() => {
             onClose(false);
@@ -23,7 +23,7 @@ export default function SideMenu({ show, onClose }) {
         >
           Close
         </button>
-      </dib>
+      </div>
     </div>
   );
 }
