@@ -32,7 +32,7 @@ class Generator extends Component {
                   this.props.onStart(parseInt(this.props.limit));
                 }}
               >
-                Game
+                Start
                 <ChevronRightIcon />
               </button>
               <button

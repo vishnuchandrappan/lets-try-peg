@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import Game from "../Components/Game/Main";
-import Results from "../Components/Results/Results";
+import { Header } from "../Components/Header";
 import { About } from "../Components/Pages/About";
 import Generator from "../Components/Pages/Generator";
 import { PegSystem } from "../Components/Pages/PegSystem";
-import { Header } from "../Components/Header";
+import Results from "../Components/Results/Results";
 function Routes({ isStarted, completed }) {
   return (
     <BrowserRouter>
@@ -21,7 +21,7 @@ function Routes({ isStarted, completed }) {
         <div>
           <Header />
           <Route path="/" exact component={Generator} />
-          <Route path="/test" component={PegSystem} />
+          <Route path="/learn" component={PegSystem} />
           <Route path="/about" component={About} />
         </div>
       )}
