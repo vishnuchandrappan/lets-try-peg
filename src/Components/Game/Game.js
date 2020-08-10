@@ -12,11 +12,25 @@ function Game({
   onComplete,
   completed,
   limit,
+  onStore,
+  started,
+  data,
 }) {
+  const [value, setValue] = useState("");
   if (parseInt(limit) === parseInt(currentItem)) {
     onComplete();
+    console.log("data");
+    console.log(data);
+    if (data.filter((item) => item.started === started).length) {
+    } else {
+      onStore({
+        started,
+        ended: Date.now(),
+        points: 0,
+        limit,
+      });
+    }
   }
-  const [value, setValue] = useState("");
   if (completed) {
     return (
       <div className="btn-container full-page">
@@ -81,6 +95,8 @@ function mapStateToProps(state) {
     randomList: state.game.randomList,
     completed: state.game.completed,
     limit: state.data.limit,
+    started: state.data.time,
+    data: state.records.data,
   };
 }
 
@@ -89,6 +105,7 @@ function mapDispatchToProps(dispatch) {
     onDone: (data) => dispatch({ type: "NEXT_ITEM", data }),
     onEnd: () => dispatch({ type: "END_GAME" }),
     onComplete: () => dispatch({ type: "COMPLETE_GAME" }),
+    onStore: (data) => dispatch({ type: "STORE_GAME", data }),
   };
 }
 

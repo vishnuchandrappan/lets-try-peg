@@ -4,7 +4,19 @@ import React from "react";
 import { connect } from "react-redux";
 import SuccessGuess from "./SuccessGuess";
 
-function GenerateTable({ data, responses, randomList, onCorrectGuess }) {
+function GenerateTable({
+  data,
+  responses,
+  randomList,
+  onComplete,
+  points,
+  gamePoints,
+}) {
+  const handleComplete = () => {
+    if (gamePoints[gamePoints.length - 1].points === 0) {
+      onComplete(points);
+    }
+  };
   return (
     <TableBody>
       {data.map((item, index) => (
@@ -16,11 +28,12 @@ function GenerateTable({ data, responses, randomList, onCorrectGuess }) {
           </TableCell>
           <TableCell align="center">
             {item === responses[randomList.indexOf(index)] ? (
-              <SuccessGuess/>
+              <SuccessGuess />
             ) : (
               <SentimentDissatisfiedIcon />
             )}
           </TableCell>
+          {index === data.length - 1 ? handleComplete() : ""}
         </TableRow>
       ))}
     </TableBody>
@@ -31,12 +44,15 @@ function mapStateToProps(state) {
     data: state.data.data,
     responses: state.game.data,
     randomList: state.game.randomList,
+    points: state.game.points,
+    gamePoints: state.records.data,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onNewGame: () => dispatch({ type: "NEW_GAME" }),
+    onComplete: (data) => dispatch({ type: "UPDATE_POINTS", data }),
   };
 }
 

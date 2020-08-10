@@ -20,11 +20,12 @@ export const DataReducer = persistReducer(
         });
 
       case "FETCH_DATA":
+        let time = Date.now();
         return Object.assign({}, state, {
           data: getData(state.limit),
           isFetching: 0,
           show: 1,
-          time: Date.now(),
+          time,
         });
 
       case "TOGGLE_SHOW":

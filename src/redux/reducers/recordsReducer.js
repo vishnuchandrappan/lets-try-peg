@@ -1,6 +1,5 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { getData } from "../../Resources/data";
 
 const INITIAL_STATE = {
   data: [],
@@ -10,27 +9,20 @@ export const RecordsReducer = persistReducer(
   { storage, key: "records", whitelist: ["data"] },
   (state = INITIAL_STATE, action) => {
     switch (action.type) {
-      case "REQUEST_DATA":
+      case "STORE_GAME":
         return Object.assign({}, state, {
-          isFetching: 1,
+          data: [...state.data, action.data],
         });
 
-      case "FETCH_DATA":
+      case "UPDATE_POINTS":
+        let temp = state.data;
+        temp[state.data.length ? state.data.length - 1 : state.data.length] = {
+          ...temp[temp.length ? temp.length - 1 : temp.length],
+          points: action.data,
+        };
+        temp.splice(state.data.length - 2, 1);
         return Object.assign({}, state, {
-          data: getData(state.limit),
-          isFetching: 0,
-          show: 1,
-          time: Date.now(),
-        });
-
-      case "TOGGLE_SHOW":
-        return Object.assign({}, state, {
-          show: !state.show,
-        });
-
-      case "SET_LIMIT":
-        return Object.assign({}, state, {
-          limit: action.data,
+          data: temp,
         });
 
       default:

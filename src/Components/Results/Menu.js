@@ -1,12 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-function Menu({ points, limit, onNewGame }) {
+function Menu({ points, limit, onNewGame, onComplete }) {
   return (
     <div className="status">
       <h1>
         {points}/{limit}
       </h1>
-      <h3>{points < limit ? "Keep Working... You'll achieve it One day" : "Excellent!"}</h3>
+      <h3>
+        {points < limit
+          ? "Keep Working... You'll achieve it One day"
+          : "Excellent!"}
+      </h3>
       <div className="btn-container">
         <button
           onClick={() => {
